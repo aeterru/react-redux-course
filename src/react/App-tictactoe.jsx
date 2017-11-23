@@ -1,10 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import { connect, Provider } from 'react-redux';
 
 import './tictactoe/style.css';
 import Board from './tictactoe/Board';
 import HistoryButton from './tictactoe/HistoryButton';
-
 const initialState = {
     moves: [{
         squares: [
@@ -174,4 +174,17 @@ class Game extends React.Component {
     }
 }
 
-export default Game;
+const mapStateToProps = state => state;
+
+const GameContainer = connect(
+    mapStateToProps,
+    {
+        onMove: move,
+    }
+    )(Game);
+
+const App = ()=> (
+    <Provider store={store}>
+        <GameContainer />
+    </Provider>
+);
